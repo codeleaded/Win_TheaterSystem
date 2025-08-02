@@ -10,7 +10,6 @@
 #include "/home/codeleaded/System/Static/Library/TransformedView.h"
 
 TheaterSystem theater;
-Vector trace;
 
 void Setup(AlxWindow* w){
 	theater = TheaterSystem_New(
@@ -30,32 +29,27 @@ void Setup(AlxWindow* w){
 		Its simply the best! Wow ive never seen anything like that!\
 		Im so glad that you have come to listen to my words!"
 	));
-
-
-	trace = Vector_New(sizeof(int));
 }
 void Update(AlxWindow* w){
 	if(Stroke(ALX_KEY_LEFT).PRESSED){
-		if(trace.size>0) Vector_PopTop(&trace);
+		TheaterSystem_Left(&theater);
 	}
 	if(Stroke(ALX_KEY_RIGHT).PRESSED){
-		Branch* b = Tree_Get_Branch(&theater.theater,trace.size,trace.Memory);
-		if(b->Childs.size>0) Vector_Push(&trace,(int[]){ 0 });
+		TheaterSystem_Right(&theater,0);
 	}
 
 	if(Stroke(ALX_KEY_UP).PRESSED){
-		TheaterSystem_Up(&theater,trace.size,trace.Memory);
+		TheaterSystem_Up(&theater);
 	}
 	if(Stroke(ALX_KEY_DOWN).PRESSED){
-		TheaterSystem_Down(&theater,trace.size,trace.Memory);
+		TheaterSystem_Down(&theater);
 	}
 	
 	Clear(WHITE);
 
-	TheaterSystem_Render(WINDOW_STD_ARGS,&theater,0.0f,100.0f,trace.size,trace.Memory);
+	TheaterSystem_Render(WINDOW_STD_ARGS,&theater,0.0f,100.0f);
 }
 void Delete(AlxWindow* w){
-	Vector_Free(&trace);
     TheaterSystem_Free(&theater);
 }
 
