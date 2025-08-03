@@ -47,7 +47,7 @@ void Update(AlxWindow* w){
 	
 	Clear(WHITE);
 
-	TheaterSystem_Render(WINDOW_STD_ARGS,&theater,0.0f,100.0f);
+	TheaterSystem_Render(WINDOW_STD_ARGS,&theater,0.0f,0.0f);
 }
 void Delete(AlxWindow* w){
     TheaterSystem_Free(&theater);
